@@ -23,7 +23,7 @@ Lorsqu'on définit le contenu d'une cellule par une formule, plusieurs cas de fi
 * la formule est syntaxiquement correcte mais non évaluable : cela se produit lorsqu'on divise par zéro, lorsque l'on référence une cellule qui n'a pas de valeur (vide ou non évaluable) ou lorsque l'on référence une cellule inexistante. Le programme doit savoir que le statut de la cellule est non évaluable (afin de ne pas chercher à calculer la formule)
 * la formule est correcte et l'expression évaluable. Le programme doit connaitre la valeur correspondant à l'évaluation de la formule
 
-Pour plus de détailles sur les attentes du projet, je vous invite à consulter le fichier 1_consigne.pdf dans le repository.
+Pour plus de détailles sur les attentes du projet, je vous invite à consulter le fichier 1_consigne.pdf dans le repository...
 
 Les fichiers (classes) du programme : 
 * Program : affiche le menu du programme et éxécute les actions demandées par l'utilisateur en appelant les autres classes et leurs méthodes 
