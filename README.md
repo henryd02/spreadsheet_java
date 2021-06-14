@@ -26,12 +26,12 @@ Lorsqu'on définit le contenu d'une cellule par une formule, plusieurs cas de fi
 Pour plus de détailles sur les attentes du projet, je vous invite à consulter le fichier 1_consigne.pdf dans le repository.
 
 Les fichiers (classes) du programme : 
-* Program.java : affiche le menu du programme et éxécute les actions demandées par l'utilisateur en appelant les autres classes et leurs méthodes 
+* Program : affiche le menu du programme et éxécute les actions demandées par l'utilisateur en appelant les autres classes et leurs méthodes 
 * Grid.java : 2d-array qui représente le tableur en mémoire et qui applique des différentes méthodes aux cellules (nodes)
-* Node.java : défini une cellule avec ses coordonnées (right, down) et sa valeur (classe value)
-* Value.java : défini la valeur qui est attribuée à la cellule : valeur décimal, valeur texte, le tag (défini le type de valeur)
-* Tests.java : une série de test avec junit permettant de tester le programme en fonction de l'ajout de certaines valeurs
-* UseCalcGUI.java et CalcGUI.java permette d'afficher une interface graphique à l'aide de JFrame afin que l'utilisateur puisse inter agir de cette manière avec le programme
+* Node : défini une cellule avec ses coordonnées (right, down) et sa valeur (classe value)
+* Value : défini la valeur qui est attribuée à la cellule : valeur décimal, valeur texte, le tag (défini le type de valeur)
+* Tests : une série de test avec junit permettant de tester le programme en fonction de l'ajout de certaines valeurs
+* UseCalcGUI et CalcGUI permette d'afficher une interface graphique à l'aide de JFrame afin d'afficher le tableur
 
 
 Notions à utiliser dans le projet : 
