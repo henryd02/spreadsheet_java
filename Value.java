@@ -1,38 +1,58 @@
 package spreadsheet_project;
 
 public class Value {
-	  private double dval;
-	  private String sval;
-	  private String tag ;
+	private double dval;
+	private String sval;
+	private String tag ;
 	  
-	  public Value() {
-	    dval = 0.0;
-	    sval = null;
-	    tag = "STRING";
-	  }
+	public Value() {
+		dval = 0.0;
+		sval = null;
+		tag = "STRING";
+	}
 	  
-	  //Constructor
+	public static boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        double d = Double.parseDouble(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
 	  
-	  public Value(String s){
-		  
+	//Constructor
+  
+	public Value(String s){
+		//System.out.println(s);
 		// Check if s is null
-	    if (s == null) {
-		      sval=null;
-		      tag = "STRING";
-		    }
-	    // Check if s starts with a quote, and if so remove it
-	    
-	    else if(isQuote(s) == true){        
-	      s = s.substring(1);          
-	      this.sval = s;
-	      tag = "STRING";
-	    }
-	    else{
-	      dval = Double.parseDouble(s);
-	      tag = "DBL";
-	    }
-	  }
-	  
+		if (s == null) {
+			sval=null;
+			tag = "STRING";
+		}
+	
+		// Check if s starts with a quote, and if so remove it
+	
+		// else if(isQuote(s) == true){  
+			//System.out.println("string : "+s);
+			//s = s.substring(1);          
+			//this.sval = s;
+			//tag = "STRING";
+		//}
+		else if (isNumeric(s)){
+			// System.out.println("num : "+s);
+			dval = Double.parseDouble(s);
+			tag = "DBL";
+		}
+		else {
+			// System.out.println("string : "+s);
+			this.sval = s;
+			tag = "STRING";
+		}
+	}
+  
 	  // Check if the first character of input is a quote -> returns true or false
 	  
 	  public boolean isQuote(String s){
@@ -48,6 +68,7 @@ public class Value {
 	      newValue.dval = this.dval + v.dval;
 	      newValue.tag = "DBL";                                
 	    }
+	    
 	    // If both Values don't have DBL tags, don't do the addition and set the new Value's tag to INVALID
 	    else
 	      newValue.tag = "INVALID";                            
@@ -95,7 +116,7 @@ public class Value {
 	      newValue.tag = "INVALID";
 	    }
 	    else
-	      newValue.tag = "INCALID";
+	      newValue.tag = "INVALID";
 	    return newValue;
 	  }
 	  
@@ -108,9 +129,9 @@ public class Value {
 	      return String.format("%10.4f", this.getDVal());
 	  }
 
-	  // Method to calculate sum of a bloc, ex : Somme((3,1),(5,2))
+	  // Write method to calculate sum of a bloc, ex : Somme((3,1),(5,2))
 	  
-	  // Method to calculate mean of a bloc, ex : Moy(3,2),(5,2)
+	  // Write method to calculate mean of a bloc, ex : Moy(3,2),(5,2)
 	  
 	  // Getter methods
 	  

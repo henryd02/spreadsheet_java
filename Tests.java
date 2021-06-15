@@ -7,6 +7,7 @@ import junit.framework.TestCase;
  * Every method starting with the word "test" will be called when running
  * the test with JUnit.
  */
+
 public class Tests extends TestCase {
   
 
@@ -97,10 +98,5 @@ public class Tests extends TestCase {
     g.assignCell(1,1,"24");
     assertEquals(g.getHead().getDown().getRight().getValue().getDVal(), 24.0);
   }
-
-      
-    
-  
-
   
 }

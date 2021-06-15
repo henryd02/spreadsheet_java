@@ -5,6 +5,8 @@ import javax.swing.*;
 
 // ====================================================================
 public class CalcGUI{
+	// String filePath = "/Users/henry/Desktop/_NFA035/_projet/";
+	// String [][] cellArray = Program.loadFile(filePath);
     JTextField[][] tft = new JTextField[10][6];
     JPanel jpane;
     JFrame fenetre;
@@ -22,7 +24,9 @@ public class CalcGUI{
 	for (int i=0; i<10; i++){
 	    for (int j=0; j<6; j++){  
 		tft[i][j]=new JTextField();
-		//           tft[i][j].setText(" " + i + " " + j);
+		tft[i][j].setText(" " + i + " " + j);
+		// System.out.println(cellArray[i][j]);
+		//tft[i][j].setText(cellArray[i][j]); 
 		tft[i][j].setHorizontalAlignment(JTextField.CENTER); 
 		tft[i][j].setEditable(false);
 		tft[i][j].setBackground(new Color(255,228,225));
