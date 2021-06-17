@@ -1,5 +1,7 @@
 package spreadsheet_project;
 
+// Classe permettant de stocker les valeurs d'une cellule : valeur décimal, valeur texte et un tag s'il y a une valeur texte ou non
+
 public class Value {
 	private double dval;
 	private String sval;

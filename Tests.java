@@ -3,9 +3,8 @@ package spreadsheet_project;
 import junit.framework.TestCase;
 
 /**
- * A JUnit test case class.
- * Every method starting with the word "test" will be called when running
- * the test with JUnit.
+ * A JUnit test pour écrire des tests fonctionnels
+ * Toutes les méthodes qui commencent par le mot "test" vont être exécuté lorsqu'elles seront appelées
  */
 
 public class Tests extends TestCase {

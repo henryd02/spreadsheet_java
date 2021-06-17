@@ -3,13 +3,9 @@ package spreadsheet_project;
 import java.io.*;
 import java.util.Scanner;
 
-import project.Image;
-import project.Segment;
-import project.Terminal;
-
 public class Program {
 	
-	// Method to load file
+	// Chargement du fichier
 	public static String[][] loadFile (String filePath) {
 		String nomFichier ;
 		FileInputStream fichier ;
@@ -20,7 +16,8 @@ public class Program {
         Grid grid = new Grid();
         int j = 0;
 		
-		Terminal.ecrireString ("Entrez le nom du fichier à afficher :");
+		Terminal.ecrireString ("Entrez le chemin absolu vers le répertoire + le nom du fichier à afficher \n"
+				+ "exemple /Users/XXX/Desktop/_NFA035/_projet/table.txt :");
 		nomFichier = Terminal.lireString();
 		try{
 			fichier = new FileInputStream(filePath+nomFichier);
@@ -71,26 +68,29 @@ public class Program {
 		return cellArray;
 	}
   
-	// Method to save file
-	
-	public static void saveFile (String filePath) {
+	// Sauvegarde du fichier
+	public static void saveFile (String filePath, String[][] cellArray) {
 		String nomFichier;
 		FileOutputStream fichier ;
-		String aEcrire;
-		Terminal.ecrireString("Entrez le nom du fichier"); 
+		String aEcrire="";
+		Terminal.ecrireString("Entrez le nom du chemin absolue vers le répertoire + le nom du fichier à enregister \n"
+				+ "exemple /Users/XXX/Desktop/_NFA035/_projet/toto.txt :"); 
 		nomFichier = Terminal.lireString(); 
-		Terminal.ecrireStringln("Entrez des lignes à enregistrer."); 
-		Terminal.ecrireStringln("Tapez FIN lorsque vous avez fini."); 
 		try{
 			fichier = new FileOutputStream(filePath+nomFichier ); 
-			aEcrire = Terminal.lireString();
-			while (!aEcrire.equals("FIN")){
-				for (int i = 0; i<aEcrire.length();i++){ 
-					fichier.write(aEcrire.charAt(i));
-				}
-				fichier.write('\r'); fichier.write('\n'); 
-				aEcrire = Terminal . lireString ();
+		    for(int i = 0; i < cellArray[i].length; i++) {
+		        for(int j = 0; j < cellArray[0].length; j++){
+		            aEcrire += cellArray[i][j]+" &";
+		        }
+		    	aEcrire += "\n";
+		    }
+		    System.out.println("Le tableur a bien été enregistré dans le fichier "+nomFichier);
+			//aEcrire = Terminal.lireString();
+			for (int i = 0; i<aEcrire.length();i++){ 
+				fichier.write(aEcrire.charAt(i));
 			}
+			fichier.write('\r'); fichier.write('\n'); 
+			aEcrire = Terminal . lireString ();
 			fichier.close(); 
 		}catch(IOException exc){
 			Terminal.ecrireStringln("Erreur d'entree−sortie"); 
@@ -101,36 +101,40 @@ public class Program {
 		
 	public static void main(String[] args){ 
 		
-		// Initialize variables
+		// Initialisation des variables
 		Scanner scanner = new Scanner(System.in);
-		Grid g = new Grid(); // Constructs empty 10x6 grid
+		Grid g = new Grid(); 
 	    int row,col;
 	    String val;
-	    String filePath = "/Users/henry/Desktop/_NFA035/_projet/";
+	    String filePath = "/";
+	    String[][] cellArray = new String[10][6];
 	    
-		// Ask arguments from the user and runs the operation requested
+	    
+		// Demander à l'utilisateur les actions à réalisés
 	    String menu = "*** Menu *** \n"+
 	    "Pour choisir les différentes opérations, entrer la commande correspondante dans le terminal : \n" +
-	    "  Afficher le tableur                        aff\n"+
-	    "  Modifier la valeur d'une cellule             m\n"+
-	    "  Effacer la valeur d'une cellule              e\n"+
-	    "  Importer un fichier                         if\n"+
-	    "  Enregistrer un fichier                      ef\n"+
-	    "  Quitter le programme                         q\n";
+	    "  Afficher le tableur                                  a\n"+
+	    "  Modifier la valeur d'une cellule                     m\n"+
+	    "  Effacer la valeur d'une cellule                      e\n"+
+	    "  Importer un fichier                                 if\n"+
+	    "  Afficher le tableur avec les valeurs numériques     an\n"+
+	    "  Enregistrer un fichier                              ef\n"+
+	    "  Afficher l'interface graphique                      ig\n"+
+	    "  Quitter le programme                                 q\n";
 	
-		// While the user doesn't quit, run a loop displaying the menu of choices
+		// Tant que l'utilisateur n'a pas quitté, lui afficher le menu des choix
 		while(true){
 			System.out.print("\n" + menu);
 	  
-			//Take input from user, and use input to determine which case to run
+			// Enregistrer la commande de l'utilisateur et réaliser l'action correspondante
 			String input = scanner.nextLine();
 	  
-			// Wrap in try the operations in order to manage errors
+			// Encapsuler l'opération dans un try afin de gérer les erreurs
 	  
 			try{
-				// Switch cases in order to do operations respect user request
+				// Tester les différents cas en fonction de la demande de l'utilisateur
 				switch(input){
-					case "aff":
+					case "a":
 				        g.display();
 				        break;
 			    
@@ -159,22 +163,41 @@ public class Program {
 						}
 						g.deleteCell(row,col);
 						break;
-			       
+						
 					case "if":
-						String [][] cellArray = loadFile(filePath);
-						g.importFile(cellArray);
+						cellArray = loadFile(filePath);
+						g.arrayToGrid(cellArray);
 						break;
+					    
+					case "an":
+						cellArray = g.calculate(cellArray);
+						g.arrayToGrid(cellArray);
+						g.display();
+						break;
+						
+					case "ig":
+						if(cellArray!=null) {
+							CalcGUI fenetre = new CalcGUI(cellArray);
+							Terminal.lireString();
+							fenetre.afficheString("toto",2,3);
+							fenetre.afficheValeur(145,4,3);
+							fenetre.effaceCase(3,7);
+						}
+						break;
+						
 					case "ef":  
-						// Write code to insert Grid cells values in the file before to save it
-						saveFile(filePath); 
+						saveFile(filePath, cellArray); 
 						break;
+						
 					case "q":
 						break;
 					default:
 						System.out.println("Error: Please enter one of the commands in the menu");
-			    }
-			  }
-			  finally {}
+				}
+			}
+			finally {
+				  
+			}
 			if(input.equals("q"))
 				break;
 	    }

@@ -1,5 +1,7 @@
 package spreadsheet_project;
 
+// Classe qui permet de stocker les coordonnées et la valeur d'une cellule
+
 public class Node {
 	  
 	  private Value value;
